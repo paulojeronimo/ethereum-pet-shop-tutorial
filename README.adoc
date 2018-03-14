@@ -1,0 +1,177 @@
+= Ethereum pet-shop tutorial (step by step, using Truffle)
+Paulo Jerônimo <paulojeronimo@gmail.com>; {localdatetime}
+:toc:
+:icons: font
+
+A copy and paste execution of http://truffleframework.com/tutorials/pet-shop["Ethereum Pet Shop"].
+
+[[step00]]
+== Step 00: Creating some basic shell functions
+
+----
+$ add() { cat - > "$1"; git add "$1"; git commit -m "File $1 added"; }
+$ apply() { git apply "$1"; git difftool; git commit -am "$2"; }
+----
+
+[[step01]]
+== Step 01: Creating a Truffle project using a Truffle Box
+
+http://truffleframework.com/tutorials/pet-shop#creating-a-truffle-project-using-a-truffle-box[Read this].
+
+----
+$ npm install -g truffle
+$ mkdir pet-shop-tutorial && cd $_
+$ truffle unbox pet-shop
+$ find . ! -path './node_modules/*'
+$ git init
+$ cat > .gitignore <<'EOF'
+node_modules
+EOF
+$ git add -A
+$ git commit -m 'Initial commit'
+----
+
+----
+$ add contracts/Adoption.sol <<'EOF'
+pragma solidity ^0.4.17;
+
+contract Adoption {
+
+}
+EOF
+----
+
+[[step02]]
+== Step 02: Writing the smart contract
+
+http://truffleframework.com/tutorials/pet-shop#your-first-function-adopting-a-pet[Your first function: Adopting a pet]
+
+----
+$ apply ../patches/01.patch 'Your first function: Adopting a pet'
+----
+
+http://truffleframework.com/tutorials/pet-shop#your-second-function-retrieving-the-adopters[Your second function: Retrieving the adopters]
+
+----
+$ apply ../patches/02.patch 'Your second function: Retrieving the adopters'
+----
+
+[[step03]]
+== Step 03: Compiling and migrating the smart contract
+
+http://truffleframework.com/tutorials/pet-shop#compiling-and-migrating-the-smart-contract[Read this].
+
+----
+$ truffle compile
+# some warnings will appear ... normal!
+----
+
+----
+$ add migrations/2_deploy_contracts.js <<'EOF'
+var Adoption = artifacts.require("Adoption");
+
+module.exports = function(deployer) {
+  deployer.deploy(Adoption);
+};
+EOF
+----
+
+Download and install http://truffleframework.com/ganache[Ganache]. Double click the icon to launch the application.
+
+----
+$ truffle migrate
+$ tree build/
+----
+
+----
+$ echo build >> .gitignore
+$ git commit -am 'File .gitignore modified'
+----
+
+== Step 04: Testing the smart contract
+
+http://truffleframework.com/tutorials/pet-shop#testing-the-smart-contract[Read this].
+
+----
+$ add test/TestAdoption.sol <<'EOF'
+pragma solidity ^0.4.17;
+
+import "truffle/Assert.sol";
+import "truffle/DeployedAddresses.sol";
+import "../contracts/Adoption.sol";
+
+contract TestAdoption {
+  Adoption adoption = Adoption(DeployedAddresses.Adoption());
+
+}
+EOF
+----
+
+http://truffleframework.com/tutorials/pet-shop#testing-the-adopt-function[Testing the adopt() function]
+
+----
+$ apply ../patches/03.patch 'Testing the adopt() function'
+----
+
+http://truffleframework.com/tutorials/pet-shop#testing-retrieval-of-a-single-pet-39-s-owner[Testing retrieval of a single pet's owner]
+
+----
+$ apply ../patches/04.patch "Testing retrieval of a single pet's owner"
+----
+
+http://truffleframework.com/tutorials/pet-shop#testing-retrieval-of-all-pet-owners[Testing retrieval of all pet owners]
+
+----
+$ apply ../patches/05.patch "Testing retrieval of all pet owners"
+----
+
+http://truffleframework.com/tutorials/pet-shop#running-the-tests[Running the tests]
+
+----
+$ truffle test
+----
+
+== Step 05: Creating a user interface to interact with the smart contract
+
+http://truffleframework.com/tutorials/pet-shop#instantiating-web3[Instantiating web3]
+
+----
+$ apply ../patches/06.patch 'Instantiating web3'
+----
+
+http://truffleframework.com/tutorials/pet-shop#instantiating-the-contract[Instantiating the contract]
+
+----
+$ apply ../patches/07.patch 'Instantiating the contract'
+----
+
+http://truffleframework.com/tutorials/pet-shop#getting-the-adopted-pets-and-updating-the-ui[Getting The Adopted Pets and Updating The UI]
+
+----
+$ apply ../patches/08.patch 'Getting The Adopted Pets and Updating The UI'
+----
+
+http://truffleframework.com/tutorials/pet-shop#handling-the-adopt-function[Handling the adopt() Function]
+
+----
+$ apply ../patches/09.patch 'Handling the adopt() Function'
+----
+
+== Step 06: Interacting with the dapp in a browser
+
+Read and follow http://truffleframework.com/tutorials/pet-shop#installing-and-configuring-metamask["Installing and configuring MetaMask"].
+
+http://truffleframework.com/tutorials/pet-shop#installing-and-configuring-lite-server[Installing and configuring lite-server]
+
+----
+$ cat bs-config.json
+$ sed -n '9,12p' package.json
+----
+
+http://truffleframework.com/tutorials/pet-shop#using-the-dapp[Using the dapp]
+
+----
+$ npm run dev
+----
+
+Congratulations! You have taken a huge step to becoming a full-fledged dapp developer.

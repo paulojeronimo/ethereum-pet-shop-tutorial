@@ -1,0 +1,22 @@
+diff --git a/src/js/app.js b/src/js/app.js
+index 32d4d15..b9315d4 100644
+--- a/src/js/app.js
++++ b/src/js/app.js
+@@ -24,9 +24,14 @@ App = {
+   },
+ 
+   initWeb3: function() {
+-    /*
+-     * Replace me...
+-     */
++    // Is there an injected web3 instance?
++    if (typeof web3 !== 'undefined') {
++      App.web3Provider = web3.currentProvider;
++    } else {
++      // If no injected web3 instance is detected, fall back to Ganache
++      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
++    }
++    web3 = new Web3(App.web3Provider);
+ 
+     return App.initContract();
+   },

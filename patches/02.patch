@@ -1,0 +1,14 @@
+diff --git a/contracts/Adoption.sol b/contracts/Adoption.sol
+index 9aefe63..ef8f1ff 100644
+--- a/contracts/Adoption.sol
++++ b/contracts/Adoption.sol
+@@ -9,4 +9,9 @@ contract Adoption {
+         adopters[petId] = msg.sender;
+         return petId;
+     }
++
++    // Retrieving the adopters
++    function getAdopters() public view returns (address[16]) {
++        return adopters;
++    }
+ }
