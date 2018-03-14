@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+add() { cat - > "$1"; git add "$1"; git commit -m "File $1 added"; }
+apply() { git apply "$1"; git difftool; git commit -am "$2"; }

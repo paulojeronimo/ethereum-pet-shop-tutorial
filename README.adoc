@@ -6,11 +6,20 @@ Paulo Jerônimo <paulojeronimo@gmail.com>; {localdatetime}
 A copy and paste execution of http://truffleframework.com/tutorials/pet-shop["Ethereum Pet Shop"].
 
 [[step00]]
-== Step 00: Creating some basic shell functions
+== Step 00: Load some basic shell functions
+
+Install `node` and `npm`.
+
+[TIP]
+.Installation on Arch Linux
+====
+$ sudo pacman -S node npm
+====
+
+Load the functions in your current shell:
 
 ----
-$ add() { cat - > "$1"; git add "$1"; git commit -m "File $1 added"; }
-$ apply() { git apply "$1"; git difftool; git commit -am "$2"; }
+. functions
 ----
 
 [[step01]]
@@ -20,6 +29,11 @@ http://truffleframework.com/tutorials/pet-shop#creating-a-truffle-project-using-
 
 ----
 $ npm install -g truffle
+----
+
+WARNING: On Arch Linux run the command above with `sudo`.
+
+----
 $ mkdir pet-shop-tutorial && cd $_
 $ truffle unbox pet-shop
 $ find . ! -path './node_modules/*'
@@ -77,6 +91,15 @@ EOF
 ----
 
 Download and install http://truffleframework.com/ganache[Ganache]. Double click the icon to launch the application.
+
+[TIP]
+.Installation/ execution on Arch Linux
+====
+----
+$ yaourt ganache
+$ ganache &> /dev/null &
+----
+====
 
 ----
 $ truffle migrate
