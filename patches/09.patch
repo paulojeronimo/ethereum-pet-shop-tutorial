@@ -1,34 +1,29 @@
 diff --git a/src/js/app.js b/src/js/app.js
-index 74c764e..b0e0b9e 100644
+index 994bdee..74c764e 100644
 --- a/src/js/app.js
 +++ b/src/js/app.js
-@@ -79,9 +79,26 @@ App = {
+@@ -57,9 +57,21 @@ App = {
+   },
  
-     var petId = parseInt($(event.target).data('id'));
- 
+   markAdopted: function(adopters, account) {
 -    /*
 -     * Replace me...
 -     */
 +    var adoptionInstance;
 +
-+    web3.eth.getAccounts(function(error, accounts) {
-+      if (error) {
-+        console.log(error);
++    App.contracts.Adoption.deployed().then(function(instance) {
++      adoptionInstance = instance;
++
++      return adoptionInstance.getAdopters.call();
++    }).then(function(adopters) {
++      for (i = 0; i < adopters.length; i++) {
++        if (adopters[i] !== '0x0000000000000000000000000000000000000000') {
++          $('.panel-pet').eq(i).find('button').text('Success').attr('disabled', true);
++        }
 +      }
-+
-+      var account = accounts[0];
-+
-+      App.contracts.Adoption.deployed().then(function(instance) {
-+        adoptionInstance = instance;
-+
-+        // Execute adopt as a transaction by sending account
-+        return adoptionInstance.adopt(petId, {from: account});
-+      }).then(function(result) {
-+        return App.markAdopted();
-+      }).catch(function(err) {
-+        console.log(err.message);
-+      });
++    }).catch(function(err) {
++      console.log(err.message);
 +    });
-   }
+   },
  
- };
+   handleAdopt: function(event) {

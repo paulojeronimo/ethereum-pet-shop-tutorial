@@ -1,17 +1,14 @@
-diff --git a/test/TestAdoption.sol b/test/TestAdoption.sol
-index c8b6f62..38d09f5 100644
---- a/test/TestAdoption.sol
-+++ b/test/TestAdoption.sol
-@@ -7,4 +7,12 @@ import "../contracts/Adoption.sol";
- contract TestAdoption {
-   Adoption adoption = Adoption(DeployedAddresses.Adoption());
+diff --git a/contracts/Adoption.sol b/contracts/Adoption.sol
+index d07ad6d..cf4d66c 100644
+--- a/contracts/Adoption.sol
++++ b/contracts/Adoption.sol
+@@ -11,4 +11,9 @@ contract Adoption {
  
-+  // Testing the adopt() function
-+  function testUserCanAdoptPet() public {
-+    uint returnedId = adoption.adopt(8);
+     return petId;
+   }
 +
-+    uint expected = 8;
-+
-+    Assert.equal(returnedId, expected, "Adoption of pet ID 8 should be recorded.");
++  // Retrieving the adopters
++  function getAdopters() public view returns (address[16]) {
++    return adopters;
 +  }
  }

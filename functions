@@ -1,4 +1,44 @@
 #!/usr/bin/env bash
 
-add() { cat - > "$1"; git add "$1"; git commit -m "File $1 added"; }
-apply() { git apply "$1"; git difftool; git commit -am "$2"; }
+pet-shop-init() {
+  git init
+
+  cat > .gitignore <<'EOF'
+node_modules
+EOF
+
+  cat > README.adoc <<EOF
+= Ethereum Pet Shop
+
+Created by following Paulo Jeronimo's https://github.com/paulojeronimo/ethereum-pet-shop-tutorial[ethereum-pet-shop-tutorial].
+
+My software versions:
+
+----
+$ uname -a
+`uname -a`
+
+$ node -v
+`node -v`
+
+$ npm -v
+`npm -v`
+
+$ truffle version
+`truffle version`
+----
+EOF
+
+  git add -A
+  git commit -m 'Initial commit'
+}
+
+pet-shop-add() { cat - > "$1"; git add "$1"; git commit -m "File $1 added"; }
+
+pet-shop-apply() { git apply "$1"; git difftool; git commit -am "$2"; }
+
+pet-shop() {
+  local f="pet-shop-$1"
+  shift
+  type "$f" &> /dev/null && $f "$@"
+}

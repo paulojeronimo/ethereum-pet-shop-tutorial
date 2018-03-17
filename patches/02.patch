@@ -1,14 +1,18 @@
 diff --git a/contracts/Adoption.sol b/contracts/Adoption.sol
-index 9aefe63..ef8f1ff 100644
+index 188371d..d07ad6d 100644
 --- a/contracts/Adoption.sol
 +++ b/contracts/Adoption.sol
-@@ -9,4 +9,9 @@ contract Adoption {
-         adopters[petId] = msg.sender;
-         return petId;
-     }
+@@ -2,4 +2,13 @@ pragma solidity ^0.4.17;
+ 
+ contract Adoption {
+   address[16] public adopters;
 +
-+    // Retrieving the adopters
-+    function getAdopters() public view returns (address[16]) {
-+        return adopters;
-+    }
++  // Adopting a pet
++  function adopt(uint petId) public returns (uint) {
++    require(petId >= 0 && petId <= 15);
++
++    adopters[petId] = msg.sender;
++
++    return petId;
++  }
  }

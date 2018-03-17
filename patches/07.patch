@@ -1,25 +1,22 @@
 diff --git a/src/js/app.js b/src/js/app.js
-index b9315d4..994bdee 100644
+index 32d4d15..b9315d4 100644
 --- a/src/js/app.js
 +++ b/src/js/app.js
-@@ -37,9 +37,17 @@ App = {
+@@ -24,9 +24,14 @@ App = {
    },
  
-   initContract: function() {
+   initWeb3: function() {
 -    /*
 -     * Replace me...
 -     */
-+    $.getJSON('Adoption.json', function(data) {
-+      // Get the necessary contract artifact file and instantiate it with truffle-contract
-+      var AdoptionArtifact = data;
-+      App.contracts.Adoption = TruffleContract(AdoptionArtifact);
-+
-+      // Set the provider for our contract
-+      App.contracts.Adoption.setProvider(App.web3Provider);
-+
-+      // Use our contract to retrieve and mark the adopted pets
-+      return App.markAdopted();
-+    });
++    // Is there an injected web3 instance?
++    if (typeof web3 !== 'undefined') {
++      App.web3Provider = web3.currentProvider;
++    } else {
++      // If no injected web3 instance is detected, fall back to Ganache
++      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
++    }
++    web3 = new Web3(App.web3Provider);
  
-     return App.bindEvents();
+     return App.initContract();
    },

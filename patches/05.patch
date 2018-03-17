@@ -1,20 +1,19 @@
 diff --git a/test/TestAdoption.sol b/test/TestAdoption.sol
-index a5c1f21..568d161 100644
+index 38d09f5..a5c1f21 100644
 --- a/test/TestAdoption.sol
 +++ b/test/TestAdoption.sol
-@@ -25,4 +25,15 @@ contract TestAdoption {
+@@ -15,4 +15,14 @@ contract TestAdoption {
  
-     Assert.equal(adopter, expected, "Owner of pet ID 8 should be recorded.");
+     Assert.equal(returnedId, expected, "Adoption of pet ID 8 should be recorded.");
    }
 +
-+  // Testing retrieval of all pet owners
-+  function testGetAdopterAddressByPetIdInArray() public {
++  // Testing retrieval of a single pet's owner
++  function testGetAdopterAddressByPetId() public {
 +    // Expected owner is this contract
 +    address expected = this;
 +
-+    // Store adopters in memory rather than contract's storage
-+    address[16] memory adopters = adoption.getAdopters();
++    address adopter = adoption.adopters(8);
 +
-+    Assert.equal(adopters[8], expected, "Owner of pet ID 8 should be recorded.");
++    Assert.equal(adopter, expected, "Owner of pet ID 8 should be recorded.");
 +  }
  }
