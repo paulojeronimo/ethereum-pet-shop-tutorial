@@ -1,8 +1,8 @@
 diff --git a/src/js/app.js b/src/js/app.js
-index 74c764e..b0e0b9e 100644
+index ecd976a..29e48ae 100644
 --- a/src/js/app.js
 +++ b/src/js/app.js
-@@ -79,9 +79,26 @@ App = {
+@@ -90,9 +90,26 @@ App = {
  
      var petId = parseInt($(event.target).data('id'));
  

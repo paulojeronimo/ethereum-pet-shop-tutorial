@@ -1,5 +1,5 @@
 diff --git a/contracts/Adoption.sol b/contracts/Adoption.sol
-index d07ad6d..cf4d66c 100644
+index b0667ae..e2dda21 100644
 --- a/contracts/Adoption.sol
 +++ b/contracts/Adoption.sol
 @@ -11,4 +11,9 @@ contract Adoption {
@@ -8,7 +8,7 @@ index d07ad6d..cf4d66c 100644
    }
 +
 +  // Retrieving the adopters
-+  function getAdopters() public view returns (address[16]) {
++  function getAdopters() public view returns (address[16] memory) {
 +    return adopters;
 +  }
  }

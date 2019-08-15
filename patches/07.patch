@@ -1,19 +1,31 @@
 diff --git a/src/js/app.js b/src/js/app.js
-index 32d4d15..b9315d4 100644
+index 93bc9e9..daf0b4b 100644
 --- a/src/js/app.js
 +++ b/src/js/app.js
-@@ -24,9 +24,14 @@ App = {
+@@ -24,9 +24,26 @@ App = {
    },
  
-   initWeb3: function() {
+   initWeb3: async function() {
 -    /*
 -     * Replace me...
 -     */
-+    // Is there an injected web3 instance?
-+    if (typeof web3 !== 'undefined') {
-+      App.web3Provider = web3.currentProvider;
-+    } else {
-+      // If no injected web3 instance is detected, fall back to Ganache
++    // Modern dapp browsers...
++    if (window.ethereum) {
++      App.web3Provider = window.ethereum;
++      try {
++        // Request account access
++        await window.ethereum.enable();
++      } catch (error) {
++        // User denied account access...
++        console.error("User denied account access")
++      }
++    }
++    // Legacy dapp browsers...
++    else if (window.web3) {
++      App.web3Provider = window.web3.currentProvider;
++    }
++    // If no injected web3 instance is detected, fall back to Ganache
++    else {
 +      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
 +    }
 +    web3 = new Web3(App.web3Provider);

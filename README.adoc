@@ -4,6 +4,7 @@ Paulo Jerônimo <paulojeronimo@gmail.com>; {localdatetime}
 :icons: font
 :Cygwin: http://www.cygwin.com/[Cygwin]
 
+:step00-title: Setting up the development environment
 :step01-title: Creating a Truffle project using a Truffle Box
 :step02-title: Writing the smart contract
 :step02-1-title: Variable setup
@@ -14,15 +15,15 @@ Paulo Jerônimo <paulojeronimo@gmail.com>; {localdatetime}
 :step05-title: Creating a user interface to interact with the smart contract
 :step06-title: Interacting with the dapp in a browser
 
-:step01-url: http://truffleframework.com/tutorials/pet-shop#creating-a-truffle-project-using-a-truffle-box
-:step02-url: http://truffleframework.com/tutorials/pet-shop#writing-the-smart-contract
-:step02-1-url: http://truffleframework.com/tutorials/pet-shop#variable-setup
-:step02-2-url: http://truffleframework.com/tutorials/pet-shop#your-first-function-adopting-a-pet
-:step02-3-url: http://truffleframework.com/tutorials/pet-shop#your-second-function-retrieving-the-adopters
-:step03-url: http://truffleframework.com/tutorials/pet-shop#compiling-and-migrating-the-smart-contract
-:step04-url: http://truffleframework.com/tutorials/pet-shop#testing-the-smart-contract
-:step05-url: http://truffleframework.com/tutorials/pet-shop#creating-a-user-interface-to-interact-with-the-smart-contract
-:step06-url: http://truffleframework.com/tutorials/pet-shop#interacting-with-the-dapp-in-a-browser
+:step01-url: https://www.trufflesuite.com/tutorials/pet-shop#creating-a-truffle-project-using-a-truffle-box
+:step02-url: https://www.trufflesuite.com/tutorials/pet-shop#writing-the-smart-contract
+:step02-1-url: https://www.trufflesuite.com/tutorials/pet-shop#variable-setup
+:step02-2-url: https://www.trufflesuite.com/tutorials/pet-shop#your-first-function-adopting-a-pet
+:step02-3-url: https://www.trufflesuite.com/tutorials/pet-shop#your-second-function-retrieving-the-adopters
+:step03-url: https://www.trufflesuite.com/tutorials/pet-shop#compiling-and-migrating-the-smart-contract
+:step04-url: https://www.trufflesuite.com/tutorials/pet-shop#testing-the-smart-contract
+:step05-url: https://www.trufflesuite.com/tutorials/pet-shop#creating-a-user-interface-to-interact-with-the-smart-contract
+:step06-url: https://www.trufflesuite.com/tutorials/pet-shop#interacting-with-the-dapp-in-a-browser
 
 :step01: {step01-url}[Introduction]
 :step02: {step02-url}[Introduction]
@@ -34,7 +35,7 @@ Paulo Jerônimo <paulojeronimo@gmail.com>; {localdatetime}
 :step05: {step05-url}[Introduction]
 :step06: {step06-url}[Introduction]
 
-This is a way to execute the http://truffleframework.com/tutorials/pet-shop["Ethereum Pet Shop"] (https://github.com/trufflesuite/trufflesuite.com/blob/master/public/tutorials/pet-shop.md[source page] edited on Dec 22, 2017). You can follow the steps below only by copying and paste the commands (from here to your Bash shell). When you finish running the steps presented here, you will get a local git repository called `ethereum-pet-shop` (https://github.com/paulojeronimo/ethereum-pet-shop[like this]).
+This is a way to execute the https://www.trufflesuite.com/tutorials/pet-shop["Ethereum Pet Shop -- Your First Dapp"] (https://github.com/trufflesuite/trufflesuite.com/blob/master/src/tutorials/pet-shop.md[source page] last updated in https://github.com/trufflesuite/trufflesuite.com/commit/31156e38dd4748f20707aeb6be50f5496c53accd#diff-c305a60e191333844943b8800949a9ee[this commit]). You can follow the steps below only by copying and paste the commands (from here to your Bash shell). When you finish running the steps presented here, you will get a local git repository called `ethereum-pet-shop` (https://github.com/paulojeronimo/ethereum-pet-shop[like this]).
 
 [NOTE]
 ====
@@ -43,7 +44,7 @@ This is a way to execute the http://truffleframework.com/tutorials/pet-shop["Eth
 ====
 
 [[step00]]
-== Load some basic shell functions
+== {step00-title}
 
 Before start, install `node` and `npm`.
 
@@ -60,51 +61,72 @@ $ sudo pacman -S node npm
 ====
 ----
 $ node -v
-v9.8.0
-$ npm -v 
-5.6.0
+v12.8.0
+$ npm -v
+6.10.3
 ----
 ====
 
 Load the link:functions[] in your current shell:
 
 ----
-source ./functions
+$ source ./functions
 ----
 
 NOTE: This file contains some useful functions (`pet-shop*`) that I have created to minimize the number of commands that we need to type in this tutorial.
 
-[[step01]]
-== {step01-title}
-
-{step01}
+Install `truffle`:
 
 ----
-$ npm install -g truffle
+$ npm i -g truffle
 ----
 
 WARNING: On Arch Linux run the command above with `sudo`.
-
-----
-$ truffle version
-----
 
 [NOTE]
 .Last environment tested (on macOS)
 ====
 ----
 $ truffle version
-Truffle v4.1.3 (core: 4.1.3)
-Solidity v0.4.19 (solc-js)
+Truffle v5.0.31 (core: 5.0.31)
+Solidity v0.5.0 (solc-js)
+Node v12.8.0
+Web3.js v1.2.1
 ----
 ====
+
+=== References
+
+* https://www.trufflesuite.com/tutorials/pet-shop#setting-up-the-development-environment[{step00-title}^]
+
+[[step01]]
+== {step01-title}
 
 ----
 $ mkdir ethereum-pet-shop && cd $_
 $ truffle unbox pet-shop
-$ find . ! -path './node_modules/*'
-$ pet-shop init
 ----
+
+----
+$ vim
+# Explore directory structure and files
+# <Ctrl-Z>
+----
+
+----
+$ pet-shop init
+# <Ctrl-Z>
+# Open README.adoc (generated)
+# <Ctrl-Z>
+----
+
+----
+$ git log --name-status
+----
+
+=== References
+
+* https://www.trufflesuite.com/tutorials/pet-shop#creating-a-truffle-project-using-a-truffle-box[{step01-title}]
 
 [[step02]]
 == {step02-title}
@@ -113,13 +135,13 @@ $ pet-shop init
 
 ----
 $ pet-shop add contracts/Adoption.sol <<'EOF'
-pragma solidity ^0.4.17;
+pragma solidity ^0.5.0;
 
 contract Adoption {
 
 }
 EOF
-$ git log
+$ git log --name-status
 ----
 
 {step02-1}
@@ -127,7 +149,7 @@ $ git log
 [subs="attributes+"]
 ----
 $ pet-shop apply ../patches/01.patch '{step02-1-title}'
-$ git log
+$ git log --name-status
 ----
 
 {step02-2}
@@ -164,7 +186,7 @@ module.exports = function(deployer) {
 EOF
 ----
 
-Download and install http://truffleframework.com/ganache[Ganache]. Double click the icon to launch the application.
+Download and install https://www.trufflesuite.com/ganache[Ganache]. Double click the icon to launch the application.
 
 [TIP]
 .Installation/ execution on Arch Linux
@@ -192,38 +214,45 @@ $ git commit -am 'File .gitignore modified'
 
 ----
 $ pet-shop add test/TestAdoption.sol <<'EOF'
-pragma solidity ^0.4.17;
+pragma solidity ^0.5.0;
 
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
 import "../contracts/Adoption.sol";
 
 contract TestAdoption {
-  Adoption adoption = Adoption(DeployedAddresses.Adoption());
+ // The address of the adoption contract to be tested
+ Adoption adoption = Adoption(DeployedAddresses.Adoption());
+
+ // The id of the pet that will be used for testing
+ uint expectedPetId = 8;
+
+ //The expected owner of adopted pet is this contract
+ address expectedAdopter = address(this);
 
 }
 EOF
 ----
 
-http://truffleframework.com/tutorials/pet-shop#testing-the-adopt-function[Testing the adopt() function]
+https://www.trufflesuite.com/tutorials/pet-shop#testing-the-adopt-function[Testing the adopt() function]
 
 ----
 $ pet-shop apply ../patches/04.patch 'Testing the adopt() function'
 ----
 
-http://truffleframework.com/tutorials/pet-shop#testing-retrieval-of-a-single-pet-39-s-owner[Testing retrieval of a single pet's owner]
+https://www.trufflesuite.com/tutorials/pet-shop#testing-retrieval-of-a-single-pet-39-s-owner[Testing retrieval of a single pet's owner]
 
 ----
 $ pet-shop apply ../patches/05.patch "Testing retrieval of a single pet's owner"
 ----
 
-http://truffleframework.com/tutorials/pet-shop#testing-retrieval-of-all-pet-owners[Testing retrieval of all pet owners]
+https://www.trufflesuite.com/tutorials/pet-shop#testing-retrieval-of-all-pet-owners[Testing retrieval of all pet owners]
 
 ----
 $ pet-shop apply ../patches/06.patch "Testing retrieval of all pet owners"
 ----
 
-http://truffleframework.com/tutorials/pet-shop#running-the-tests[Running the tests]
+https://www.trufflesuite.com/tutorials/pet-shop#running-the-tests[Running the tests]
 
 ----
 $ truffle test
@@ -234,25 +263,25 @@ $ truffle test
 
 {step05}
 
-http://truffleframework.com/tutorials/pet-shop#instantiating-web3[Instantiating web3]
+https://www.trufflesuite.com/tutorials/pet-shop#instantiating-web3[Instantiating web3]
 
 ----
 $ pet-shop apply ../patches/07.patch 'Instantiating web3'
 ----
 
-http://truffleframework.com/tutorials/pet-shop#instantiating-the-contract[Instantiating the contract]
+https://www.trufflesuite.com/tutorials/pet-shop#instantiating-the-contract[Instantiating the contract]
 
 ----
 $ pet-shop apply ../patches/08.patch 'Instantiating the contract'
 ----
 
-http://truffleframework.com/tutorials/pet-shop#getting-the-adopted-pets-and-updating-the-ui[Getting The Adopted Pets and Updating The UI]
+https://www.trufflesuite.com/tutorials/pet-shop#getting-the-adopted-pets-and-updating-the-ui[Getting The Adopted Pets and Updating The UI]
 
 ----
 $ pet-shop apply ../patches/09.patch 'Getting The Adopted Pets and Updating The UI'
 ----
 
-http://truffleframework.com/tutorials/pet-shop#handling-the-adopt-function[Handling the adopt() Function]
+https://www.trufflesuite.com/tutorials/pet-shop#handling-the-adopt-function[Handling the adopt() Function]
 
 ----
 $ pet-shop apply ../patches/10.patch 'Handling the adopt() Function'
@@ -263,16 +292,16 @@ $ pet-shop apply ../patches/10.patch 'Handling the adopt() Function'
 
 {step06}
 
-http://truffleframework.com/tutorials/pet-shop#installing-and-configuring-metamask[Installing and configuring MetaMask]
+https://www.trufflesuite.com/tutorials/pet-shop#installing-and-configuring-metamask[Installing and configuring MetaMask]
 
-http://truffleframework.com/tutorials/pet-shop#installing-and-configuring-lite-server[Installing and configuring lite-server]
+https://www.trufflesuite.com/tutorials/pet-shop#installing-and-configuring-lite-server[Installing and configuring lite-server]
 
 ----
 $ cat bs-config.json
 $ sed -n '9,12p' package.json
 ----
 
-http://truffleframework.com/tutorials/pet-shop#using-the-dapp[Using the dapp]
+https://www.trufflesuite.com/tutorials/pet-shop#using-the-dapp[Using the dapp]
 
 ----
 $ npm run dev

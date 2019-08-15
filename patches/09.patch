@@ -1,8 +1,8 @@
 diff --git a/src/js/app.js b/src/js/app.js
-index 994bdee..74c764e 100644
+index 4f75ffe..ecd976a 100644
 --- a/src/js/app.js
 +++ b/src/js/app.js
-@@ -57,9 +57,21 @@ App = {
+@@ -68,9 +68,21 @@ App = {
    },
  
    markAdopted: function(adopters, account) {

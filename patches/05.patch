@@ -1,19 +1,16 @@
 diff --git a/test/TestAdoption.sol b/test/TestAdoption.sol
-index 38d09f5..a5c1f21 100644
+index 38a1c97..346db32 100644
 --- a/test/TestAdoption.sol
 +++ b/test/TestAdoption.sol
-@@ -15,4 +15,14 @@ contract TestAdoption {
+@@ -20,4 +20,11 @@ contract TestAdoption {
  
-     Assert.equal(returnedId, expected, "Adoption of pet ID 8 should be recorded.");
+     Assert.equal(returnedId, expectedPetId, "Adoption of the expected pet should match what is returned.");
    }
 +
 +  // Testing retrieval of a single pet's owner
 +  function testGetAdopterAddressByPetId() public {
-+    // Expected owner is this contract
-+    address expected = this;
++    address adopter = adoption.adopters(expectedPetId);
 +
-+    address adopter = adoption.adopters(8);
-+
-+    Assert.equal(adopter, expected, "Owner of pet ID 8 should be recorded.");
++    Assert.equal(adopter, expectedAdopter, "Owner of the expected pet should be this contract");
 +  }
  }
