@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+#
+# Author: Paulo Jeronimo <paulojeronim@gmail.com>
+
+PET_SHOP_DIFFTOOL=false
 
 pet-shop-init() {
   git init
@@ -35,10 +39,18 @@ EOF
 
 pet-shop-add() { cat - > "$1"; git add "$1"; git commit -m "File $1 added"; }
 
-pet-shop-apply() { git apply "$1"; git difftool; git commit -am "$2"; }
+pet-shop-difftool() { PET_SHOP_DIFFTOOL=${1:-true}; }
+
+pet-shop-apply() {
+  git apply "$1"
+  $PET_SHOP_DIFFTOOL && git difftool
+  git commit -am "$2"
+}
 
 pet-shop() {
   local f="pet-shop-$1"
   shift
   type "$f" &> /dev/null && $f "$@"
 }
+
+# vim: ts=2 sw=2 et

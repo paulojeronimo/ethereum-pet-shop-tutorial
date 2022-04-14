@@ -5,7 +5,7 @@ index 4f75ffe..ecd976a 100644
 @@ -68,9 +68,21 @@ App = {
    },
  
-   markAdopted: function(adopters, account) {
+   markAdopted: function() {
 -    /*
 -     * Replace me...
 -     */
