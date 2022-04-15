@@ -5,6 +5,7 @@ Paulo Jerônimo <paulojeronimo@gmail.com>; {localdate}
 :idprefix:
 :idseparator: -
 :nofooter:
+:numbered:
 :toc: left
 
 // URIs
@@ -49,6 +50,15 @@ git repository called `ethereum-pet-shop-ftecm221`
 . I only tested this steps on Ubuntu (running it through WSL2).
 ====
 
+[TIP]
+====
+Use the following command to follow this tutorial from a terminal:
+
+----
+$ asciidoctor README.adoc -o - | w3m -T text/html -dump | less
+----
+====
+
 [[step00]]
 == Setting up the development environment
 
@@ -90,12 +100,16 @@ $ git checkout ftecm221
 Load the link:functions.sh[] in your current shell:
 
 ----
-$ source ./functions.sh
+$ source ./functions.sh install
 ----
 
-NOTE: This file contains some useful functions (like `pet-shop` and
+[NOTE]
+====
+. This command will also modify your startup shell file.
+. This script install some useful functions (like `pet-shop` and
 `gc`) that I have created to minimize the number of commands that we
 need to type in this tutorial.
+====
 
 Install `truffle`:
 
@@ -130,11 +144,7 @@ $ truffle unbox pet-shop
 $ pet-shop init
 ----
 
-Read the generated README.adoc.
-
-----
-$ git log --name-status
-----
+Read the generated `README.adoc`.
 
 [[step02]]
 == Writing the smart contract
@@ -149,15 +159,17 @@ contract Adoption {
 
 }
 EOF
-$ git log --name-status
 ----
+
+TIP: If you have are following tutorial without an IDE and have
+the command https://git-scm.com/docs/git-difftool[git difftool]
+configured, type `pet-shop difftool`.
 
 {step02-1}
 
 [subs="attributes+"]
 ----
 $ pet-shop apply ../patches/01.patch '{step02-1-title}'
-$ git log --name-status
 ----
 
 {step02-2}

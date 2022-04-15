@@ -2,8 +2,10 @@
 #
 # Author: Paulo Jeronimo <paulojeronim@gmail.com>
 
+GC_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd)
+
 gc() {
-  local gc_log=~/gc.log
+  local gc_log=$GC_DIR/gc.log
 
   running() { echo running pid=$1; }
   stoped() { echo stoped; }
@@ -48,7 +50,8 @@ gc() {
   gc_log() {
     local op=${1:-view}
     case "$op" in
-      view) vim -R $gc_log;;
+      name) echo $gc_log;;
+      view) less $gc_log;;
       tail) tail -f $gc_log;;
     esac
   }

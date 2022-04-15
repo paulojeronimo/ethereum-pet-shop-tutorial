@@ -5,18 +5,22 @@
 PET_SHOP_DIFFTOOL=false
 
 pet-shop-init() {
+  cp ../gc.sh .
   git init
 
   cat > .gitignore <<'EOF'
-node_modules
+/README.html
+/node_modules
+/gc.log
 EOF
 
   cat > README.adoc <<EOF
 = Ethereum Pet Shop
+:numbered:
 
-Created by following Paulo Jeronimo's https://github.com/paulojeronimo/ethereum-pet-shop-tutorial[ethereum-pet-shop-tutorial].
+Created by following Paulo Jeronimo's https://paulojeronimo.com/ethereum-pet-shop-tutorial[ethereum-pet-shop-tutorial].
 
-My software versions:
+== Environment and software versions
 
 ----
 $ uname -a
@@ -31,6 +35,51 @@ $ npm -v
 $ truffle version
 `truffle version`
 ----
+
+== Steps to run and test
+
+=== Install and run Ganache and Truffe
+
+----
+$ # Install Truffle and Ganache:
+$ npm install -g truffle
+$ npm install -g ganache
+
+$ # Load ganache helper functions:
+$ source ./gc.sh
+
+$ # Start ganache:
+$ gc start
+
+$ # Compile, install and test the contracts:
+$ truffle compile
+$ truffle migrate
+$ truffle test
+----
+
+=== Configure Metamask
+
+Import the secret recovery phrase returned by the following command:
+
+----
+$ gc seedphrase
+----
+
+Add a network and configure it with the following parameters:
+
+* Network Name: Custom RPC
+* New RPC URL: http://localhost:7545
+* Chain ID: 1337
+* Currency Symbol: ETH
+
+=== Run the web app and access it
+
+----
+$ npm install
+$ npm run dev
+----
+
+Open http://localhost:3000
 EOF
 
   git add -A
