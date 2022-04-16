@@ -9,6 +9,7 @@ Paulo Jerônimo <paulojeronimo@gmail.com>; {localdate}
 :toc: left
 
 // URIs
+:uri-repo: https://github.com/paulojeronimo/ethereum-pet-shop-tutorial
 :uri-step03: https://www.trufflesuite.com/tutorial/#compiling-and-migrating-the-smart-contract
 :uri-step04: https://www.trufflesuite.com/tutorial/#testing-the-smart-contract-using-solidity
 :uri-step05: https://www.trufflesuite.com/tutorial/#creating-a-user-interface-to-interact-with-the-smart-contract
@@ -52,7 +53,8 @@ git repository called `ethereum-pet-shop-ftecm221`
 
 [TIP]
 ====
-Use the following command to follow this tutorial from a terminal:
+Clone {uri-repo}[the GitHub repository of this tutorial] and use the
+following command to follow it in a terminal:
 
 ----
 $ asciidoctor README.adoc -o - | w3m -T text/html -dump | less
@@ -91,8 +93,9 @@ $ npm -v
 
 Clone this project and change your current directory to it:
 
+[subs="attributes+"]
 ----
-$ repo=https://github.com/paulojeronimo/ethereum-pet-shop-tutorial
+$ repo={uri-repo}
 $ git clone $repo && cd $(basename "$repo")
 $ git checkout ftecm221
 ----
